@@ -68,15 +68,15 @@ Useful for recreating or updating:
         password: password
         pool: 5
     ```
-* Add the following code to `./Gemfile` to install RSpec-Rails
+* Add the following code to `./Gemfile` to install RSpec-Rails. You can do this either with `docker-compose run --no-deps bundle add rspec-rails --version "~> 4.0.2" --group "development, test"` which also runs bundle install, or with the manual addition below
     ```ruby
     # Run against the latest stable release
     group :development, :test do
       gem 'rspec-rails', '~> 4.0.2'
     end
     ```
-* Then `docker-compose build` was run to install RSpec-Rails, followed by `docker-compose run --no-deps web rails generate rspec:install` to set up RSpec test generation
+* Then use `docker-compose build` to install RSpec-Rails, followed by `docker-compose run --no-deps web rails generate rspec:install` to set up RSpec test generation
 * Use `sudo chown -R $USER:$USER .` *again* to fix ownership of the remaining created files
-* Finally, run `docker-compose up` to run the two Docker instances, and in another shell run `docker-compose run web rake db:create` to set up the test and development databases in the PostgreSQL instance
+* Finally, run `docker-compose up` to run the two Docker instances, and in another shell run `docker-compose run web rake db:setup` to set up the test and development databases in the PostgreSQL instance, run migrations, and seed content
 
 This was based on https://docs.docker.com/compose/rails/ but required several changes to get working on the current Ruby and Rails versions, as NodeJS / NPM / Yarn did not install correctly.
