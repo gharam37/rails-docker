@@ -1,7 +1,6 @@
 FROM ruby:3.0
-RUN apt-get update -qq && apt-get install -y postgresql-client
-RUN apt-get install -y curl \
-  && curl -sL https://deb.nodesource.com/setup_14.x | bash - \
+RUN apt-get update -qq && apt-get install -y curl postgresql-client
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
   && apt-get install -y nodejs \
   && curl -L https://www.npmjs.com/install.sh | sh \
   && npm install --global yarn

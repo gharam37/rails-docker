@@ -8,22 +8,22 @@ The current versions of various dependencies are:
 
 * Ruby 3.0 - this is the base Docker image 
 * postgresql-client latest via apt-get
-* Nodejs 14.x
-* NPM latest
-* yarn latest
+* Nodejs 14.x latest via https://deb.nodesource.com/setup_14.x
+* NPM latest via https://www.npmjs.com/install.sh
+* yarn latest via NPM
 * Rails 6.1.3
 * Ruby gems as defined in the Gemfile.lock (which is included in the repo!)
 
-A Rails app has already been generated as there are several setup steps that would otherwise be missing.
+The Dockerfile, docker-compose, and Rails application files are all in the repo root. A Rails app has already been generated and is present in the repository, to save time on the manual setup steps detailed at the end of this README.
 
 ## Usage
 
-This repo is meant to contain a generic Rails setup, *not* the application that gets built on it. To use this, either fork https://github.com/danwhitston/rails-docker to your new application repo on GitHub, git clone it, and start work, or git clone it, start work and set the remote to a new destination. Either way, you should rewrite this README to give instructions for working with your own application based on this.
+This repo is meant to contain a generic Rails setup, *not* the particular application that you intend to build with it. To use this, either fork https://github.com/danwhitston/rails-docker to your new application repo on GitHub, git clone it, and start work, or git clone it, start work and set the remote to a new destination. Either way, you should rewrite this README to give instructions for working with your own application.
 
-To bring up a development instance of the docker setup:
+To bring up a development instance of the Docker setup:
 
 * First ensure that Docker is installed on your system, along with docker-compose
-* Run `docker-compose build` to set up the Rails and Postgres docker instances
+* Run `docker-compose build` to set up the Rails and Postgres Docker instances
 * Run `docker-compose up` to start a development instance
 * Your shell should show the usual Rails and Postgres command line outputs and should not give you a command line
 * Create the test and dev databases from another shell window with `docker-compose run web rake db:create`
@@ -31,7 +31,12 @@ To bring up a development instance of the docker setup:
 
 By uncommenting some lines in the docker-compose.yml, you can also enable an Adminer instance to examine your databases. 
 
-TODO: This doesn't currently have IDE or editor config files, and usage with editors requires documentation.
+## Pending tasks
+
+- [ ] Add IDE or editor configuration and documentation, so it's easier to develop with
+- [ ] Convert the setup to an initial-build script, to remove code from the repository and rebuild from fresh with each install
+- [ ] Use Ruby-3.0-Alpine as the base and add further packages as necessary
+- [ ] Add an example production config
 
 ## How it was created
 
@@ -50,7 +55,7 @@ Useful for recreating or updating:
     source 'https://rubygems.org'
     gem 'rails', '~>6.1.0'
     ```
-* Use `touch Gemfile.lock` to create an empty lockfile, needed for the docker build to work correctly
+* Use `touch Gemfile.lock` to create an empty lockfile, needed for the Docker build to work correctly
 * Create the rails app with `docker-compose run --no-deps web rails new . --force --database=postgresql --skip-test`
 * Use `sudo chown -R $USER:$USER .` to fix user ownership of the created files
 * Set up database connection in `./config/database.yml`
