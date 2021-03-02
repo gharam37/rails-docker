@@ -20,14 +20,25 @@ The Dockerfile, docker-compose, and Rails application files are all in the repo 
 
 This repo is meant to contain a generic Rails setup, *not* the particular application that you intend to build with it. To use this, either visit https://github.com/danwhitston/rails-docker and click 'Use this template', or git clone it, and start work, or git clone it, start work and set the remote to a new destination. Either way, you should rewrite this README to give instructions for working with your own application.
 
-To bring up a development instance of the Docker setup:
+There are two methods of bringing up a development instance of the Docker setup.
+
+### Method with VSCode dev container integration
+
+A `.devcontainer` folder has been added, with settings that appear to work for bringing up a dev environment. To use this, open the root folder in VSCode, ensuring that various necessary extensions are installed. They need further tweaking so that we don't need to get a CLI and manually run `rake db:setup`, then `bundle exec rails s -p 3000 -b '0.0.0.0'` to get a server at localhost:3000.
+
+### Method without VSCode dev container integration
 
 * First ensure that Docker is installed on your system, along with docker-compose
 * Run `docker-compose build` to set up the Rails and Postgres Docker instances
 * Run `docker-compose up` to start a development instance
 * Your shell should show the usual Rails and Postgres command line outputs and should not give you a command line
-* Create the test and dev databases from another shell window with `docker-compose run web rake db:create`
+* Create the test and dev databases from another shell window with `docker-compose run web rake db:setup`
 * Navigate to localhost:3000 and you should see a `Yay! You're on Rails` welcome screen
+
+After creating a scaffold for the first time, it may be necessary to:
+
+1. Set default: extract_css: true, development: dev_server: hmr: true in webpacker.yml
+1. Run `docker-compose run --rm web bundle exec rake webpacker:install` to get webpack working
 
 By uncommenting some lines in the docker-compose.yml, you can also enable an Adminer instance to examine your databases. 
 

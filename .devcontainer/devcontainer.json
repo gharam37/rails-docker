@@ -1,0 +1,61 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.158.0/containers/ruby-rails
+{
+	"name": "Ruby on Rails",
+	// Update the 'dockerComposeFile' list if you have more compose files or use different names.
+	// The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
+	"dockerComposeFile": [
+		"../docker-compose.yml",
+		"docker-compose.yml"
+	],
+
+	// The 'service' property is the name of the service for the container that VS Code should
+	// use. Update this value and .devcontainer/docker-compose.yml to the real service name.
+	"service": "web",
+
+	// The optional 'workspaceFolder' property is the path VS Code should open by default when
+	// connected. This is typically a file mount in .devcontainer/docker-compose.yml
+	"workspaceFolder": "/myapp",
+	// "workspaceFolder": "/workspace",
+
+	// "build": {
+	// 	"dockerfile": "Dockerfile",
+	// 	"args": { 
+	// 		// Update 'VARIANT' to pick a Ruby version: 2, 2.7, 2.6, 2.5
+	// 		"VARIANT": "3.0",
+	// 		"NODE_VERSION": "lts/*"
+	// 	}
+	// },
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": { 
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"solargraph.commandPath": "/usr/local/bundle/bin/solargraph",
+		"solargraph.bundlerPath": "/usr/local/bin/bundle",
+		"ruby.rubocop.executePath": "/usr/local/bundle/bin/",
+		"ruby.rubocop.onSave": true
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"rebornix.Ruby",
+		"hbenl.vscode-test-explorer",
+		"connorshea.vscode-ruby-test-adapter",
+		"castwide.solargraph",
+		"kaiwood.endwise",
+		"misogi.ruby-rubocop",
+		"groksrc.ruby",
+		"hoovercj.ruby-linter",
+		"miguel-savignano.ruby-symbols",
+		"wingrunr21.vscode-ruby"
+	],
+	
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "rails db:setup",
+
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	// "remoteUser": "vscode"
+}
