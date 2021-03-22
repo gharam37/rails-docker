@@ -18,7 +18,7 @@ The Dockerfile, docker-compose, and Rails application files are all in the repo 
 
 ## Usage
 
-This repo is meant to contain a generic Rails setup, *not* the particular application that you intend to build with it. To use this, either fork https://github.com/danwhitston/rails-docker to your new application repo on GitHub, git clone it, and start work, or git clone it, start work and set the remote to a new destination. Either way, you should rewrite this README to give instructions for working with your own application.
+This repo is meant to contain a generic Rails setup, *not* the particular application that you intend to build with it. To use this, either visit https://github.com/danwhitston/rails-docker and click 'Use this template', or git clone it, and start work, or git clone it, start work and set the remote to a new destination. Either way, you should rewrite this README to give instructions for working with your own application.
 
 To bring up a development instance of the Docker setup:
 
