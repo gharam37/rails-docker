@@ -1,4 +1,4 @@
-FROM ruby:3.0
+FROM ruby:3.0.1
 RUN apt-get update -qq && apt-get install -y curl postgresql-client
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
   && apt-get install -y nodejs \
